@@ -57,8 +57,7 @@
 \title[Multi-Agent Reinforcement Learning]
 {Multi-Agent Reinforcement Learning}
 %
-\subtitle[]
-{on Collective Learning}
+\subtitle[]{Introduction}
 %
 \author[\sspeaker{Aguzzi}]
 {\speaker{Gianluca Aguzzi} \href{mailto:gianluca.aguzzi@unibo.it}{gianluca.aguzzi@unibo.it}}
@@ -110,7 +109,7 @@
 %/////////
 
 \begin{exampleblock}{Definition}
-	\emph{Multiple} agents \textbf{learn} to take the \emph{right} actions (\textbf{policy}) to maximise a \emph{reward} signal (collective, selfish, \dots).
+	\emph{Multiple} agents \textbf{learn} to take the \emph{right} actions (\textbf{policy}) to maximise a \emph{reward} signal.
 \end{exampleblock}
 
 \begin{alertblock}{Applications}
@@ -135,8 +134,11 @@
 			\item[\faArrowRight] Centralised vs Decentralised learning and acting
 			\item[\faArrowRight] Homogeneous vs Heterogeneous agents
 		\end{itemize}
-		\item MARL learning algorithms 
 		\item Scale to \textbf{infinity}: MARL in Collective Adaptive Systems \& Aggregate Computing
+		\item Repositories: 
+			\href{https://github.com/cric96/pc-multi-agent-modelling}{\faLink}
+			\href{https://github.com/cric96/swarm-rl-alchemist}{\faLink}
+
 	\end{itemize}
 \end{exampleblock}
 \end{frame}
@@ -685,7 +687,7 @@ for(episode <- 1 to maxEpisodes) do
 	\item Preliminary results are promising ...
 	\item ... But several things need to be explored
 	\begin{itemize}
-		\item methods: MADDPG? PPO? A3C?
+		\item methods: MADDPG? PPO? A3C? MAPPO?
 		\item architectures: CNN? GNN? MLP?
 		\item reward functions: Dense? Sparse? Collective? Local?
 		\item applications: learn to restructure? learn to schedule messages?
