@@ -243,12 +243,12 @@ class Dynamics extends StochasticGame[State, Action]:
 \begin{frame}[allowframebreaks]{Learning in Multi Agent Environment / Stochastic Games}
 \begin{exampleblock}{Task type}
 	\begin{itemize}
-		\item Cooperative
+		\item \textbf{Cooperative}
 		\begin{itemize}
 			\item Agents share the same reward function ($R^1 = R^2 = \dots = R^N$) or the same collective goal
 			\item Examples: multi-agent pathfinding, multi-agent resource allocation, multi-agent task allocation, \dots
 		\end{itemize}
-		\item Competitive
+		\item \textbf{Competitive}
 		\begin{itemize}
 			\item Agents compete with each other to maximise a long-term return
 			\item Examples: Boards games, battle games, \dots
@@ -258,7 +258,7 @@ class Dynamics extends StochasticGame[State, Action]:
 %%%%
 \begin{exampleblock}{Policy Type}
 \begin{itemize}
-	\item Homogeneous
+	\item \textbf{Homogeneous}
 	\begin{itemize}
 		\item Each agent has the same action space ($ A^1 = A^2 = .. A ^N$) and use the \textbf{same} policy ($ \pi^0 = \pi^N$)
 		\item Used in \emph{cooperative} settings and with many agent interactions (e.g., swarm robotics)
@@ -267,7 +267,7 @@ class Dynamics extends StochasticGame[State, Action]:
 		\end{itemize}
 		\item Examples (swarm robotics): obstacle avoidance, flocking, team formation, \dots
 	\end{itemize}
-	\item Heterogeneous
+	\item \textbf{Heterogeneous}
 	\begin{itemize}
 		\item Each agent has a different action space ($ A^1 \neq A^2 \neq .. A ^N$) and use a \textbf{different} policy ($ \pi^0 \neq \pi^N$)
 	\end{itemize}
@@ -276,12 +276,12 @@ class Dynamics extends StochasticGame[State, Action]:
 %%%%
 \begin{exampleblock}{Communication constraints}
 \begin{itemize}
-	\item Independent
+	\item \textbf{Independent}
 	\begin{itemize}
 		\item The policy of each agent is independent of the policy of the other agents
 		\item Cooperation could emerge through environment dynamics (but is hard)
 	\end{itemize}
-	\item Joint Action
+	\item \textbf{Joint Action}
 	\begin{itemize}
 		\item The policy of each agent depends on the action of the other agents ($ \pi(s_t, a^{-i}_t)^i $, where $-i$ means the other agents' indices)
 		\item Cooperation is explicitly encoded in the policy
@@ -292,12 +292,12 @@ class Dynamics extends StochasticGame[State, Action]:
 %%%%
 \begin{exampleblock}{Execution constraints}
 \begin{itemize}
-	\item Centralised
+	\item \textbf{Centralised}
 	\begin{itemize}
 		\item A central controller is responsible for the execution of the policy
 		\item It has a global view of the environment and can coordinate the agents
 	\end{itemize}
-	\item Decentralised
+	\item \textbf{Decentralised}
 	\begin{itemize}
 		\item Each agent executes its own policy
 		\item They don't have a global view of the environment, but (potentially) they can communicate
@@ -307,12 +307,12 @@ class Dynamics extends StochasticGame[State, Action]:
 %%%%
 \begin{exampleblock}{Learning constraints}
 \begin{itemize}
-	\item Centralised
+	\item \textbf{Centralised}
 	\begin{itemize}
 		\item A central agent is responsible for the learning process
 		\item It could produce centralised or decentralised policies
 	\end{itemize}
-	\item Decentralised
+	\item \textbf{Decentralised}
 	\begin{itemize}
 		\item Each agent has its own learning process
 		\item It mainly produces decentralised policies
@@ -322,16 +322,16 @@ class Dynamics extends StochasticGame[State, Action]:
 
 \begin{alertblock}{Big Question: Can we use Single Agent RL in MAS?}
 \begin{itemize}
-	\item It depends on the task type, policy type, communication constraints, execution constraints, and learning constraints
+	\item It depends on the \emph{task type}, \emph{policy type}, \emph{communication} constraints, \emph{execution} constraints, and \emph{learning} constraints
 	\item Single agent RL could be easily adapted in some cases:
 	\begin{itemize}
 		\item Task type: cooperative
 		\item Policy type: homogeneous
 		\item Communication constraints: independent
-		\item Execution constraints: centralised / decentralised
-		\item Learning constraints: centralised / decentralised
+		\item Execution constraints: centralised/decentralised
+		\item Learning constraints: centralised/decentralised
 	\end{itemize}
-	\item In other cases, they could be fail easier
+	\item In other cases, they could fail easier
 \end{itemize}
 \end{alertblock}
 \end{frame}
@@ -367,8 +367,6 @@ trait Learner[Obs, Action]:
 	): Unit =
     if mode == AgentMode.Training then improve(state, action, reward, nextState)
   def improve(state: Obs, action: Action, reward: Double, nextState: Obs): Unit
-enum AgentMode:
-	case Training, Test
 \end{lstlisting}
 \end{exampleblock}
 \framebreak
@@ -461,7 +459,7 @@ class Simulation[State, Action](
 		\begin{itemize}
 			\item Each agent has its own policy and Q table
 			\item They update it during the training
-			\item Problems:
+			\item \textbf{Problems}:
 			\begin{itemize}
 				\item Non-stationary environment (the state of the environment changes during the training)
 				\item It hardly scales with the number of agent
@@ -471,7 +469,7 @@ class Simulation[State, Action](
 		\begin{itemize}
 			\item Each agent has access to a shared Q-table and policy
 			\item That table is updated during the training
-			\item Problems:
+			\item \textbf{Problems}:
 			\begin{itemize}
 				\item The policy is simpler with the respect to the one of the independent learners
 				\item \dots but it potentially scales with any number of agents
@@ -481,7 +479,7 @@ class Simulation[State, Action](
 		\begin{itemize}
 			\item A central server coordinates the training and the execution of the agents
 			\item The server has a policy and a Q-table that depends on the joint action of all the agents
-			\item Problems:
+			\item \textbf{Problems}:
 			\begin{itemize}
 				\item The action space grows exponentially with the number of agents (e.g. 5 agents, 5 actions each, $5^5=3125$ possible joint actions)
 			\end{itemize}
@@ -509,8 +507,8 @@ class Simulation[State, Action](
 		\item It is not able to handle continuous action space
 		\item \dots
 	\end{itemize}
-	\item Deep Reinforcement Learning is a family of methods that overcome these limitations using neural networks
-	\item Several algorithms has been proposed:
+	\item Deep Reinforcement Learning is a family of methods that overcome these limitations using \emph{neural networks}
+	\item Several algorithms have been proposed:
 	\begin{itemize}
 		\item \textbf{Deep Q-Learning}: The Q-table is approximated by a neural network
 		\begin{itemize}
@@ -518,7 +516,7 @@ class Simulation[State, Action](
 			\item It could be used for raw input (e.g., images)
 			\item It has been used to solve complex tasks (e.g., Atari games)
 		\end{itemize}
-		\item Policy Gradient: the neural networks is used to represent the \emph{policy} of the Agents
+		\item Policy Gradient: the neural networks are used to represent the \emph{policy} of the Agents
 		\item Several others: Actor-Critic, Deep Deterministic Policy Gradient, \dots
 	\end{itemize}
 \end{itemize}
@@ -690,13 +688,13 @@ for(episode <- 1 to maxEpisodes) do
 		\item methods: MADDPG? PPO? A3C?
 		\item architectures: CNN? GNN? MLP?
 		\item reward functions: Dense? Sparse? Collective? Local?
-		\item applications: learn to restructure? learn to schedule messagges?
+		\item applications: learn to restructure? learn to schedule messages?
 	\end{itemize}
 	\item Ongoing work (they can be part of your thesis/project!)
 	\begin{itemize}
 		\item Spatio-temporal phenomena combined Graph Neural Network with Aggregate Computing
 		\item Deep Reinforcement Learning for collectively distributed schedulers
-		\item Learn to restructure, how to move (edge?, cloud?) computation to improve performance
+		\item Learn to restructure, how to move (edge? Cloud?) computation to improve performance
 		\item Collective program sketching for general aggregate computing program.
 	\end{itemize}
 \end{itemize}
